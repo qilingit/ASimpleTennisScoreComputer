@@ -1,7 +1,26 @@
 import java.security.InvalidParameterException;
 
 public class TennisGame {
-    public static void tennisScoreComputer(String playersWinOrder) {
+    public static void main(String[] args) {
+        TennisGame tennisGame = new TennisGame();
+
+        System.out.println("Game 1: ABABAA");
+        tennisGame.tennisScoreComputer("ABABAA");
+
+        System.out.println("Game 2: AAAA");
+        tennisGame.tennisScoreComputer("AAAA");
+
+        System.out.println("Game 3: AAABBBABAA");
+        tennisGame.tennisScoreComputer("AAABBBABAA");
+
+        System.out.println("Game 4: AAABBBABAA");
+        tennisGame.tennisScoreComputer("AAABBBABBB");
+
+        System.out.println("Game 5: ABABBABABB");
+        tennisGame.tennisScoreComputer("ABABBABABB");
+    }
+
+    public void tennisScoreComputer(String playersWinOrder) {
         int playerAScore = 0, playerBScore = 0;
         boolean playerAIsAdvantage = false, playerBIsAdvantage = false;
         if (playersWinOrder == null || playersWinOrder.isBlank() || (!playersWinOrder.matches("[AB]+"))) {
@@ -11,8 +30,8 @@ public class TennisGame {
             printWhoWins(playersWinOrder.charAt(i));
             // When the two players both have 40 points
             if (playersBothHave40(playerAScore, playerBScore)) {
-                if (!playerAIsAdvantage && !playerBIsAdvantage) {
-                    if (playersWinOrder.charAt(i) == 'A') {
+                if (!playerAIsAdvantage && !playerBIsAdvantage) { // Game in deuce
+                    if (playersWinOrder.charAt(i) == 65) {
                         playerAIsAdvantage = true;
                     } else {
                         playerBIsAdvantage = true;
@@ -22,14 +41,14 @@ public class TennisGame {
                         System.out.println("Player A wins the game\n");
                         return;
                     } else {
-                        playerAIsAdvantage = false;
+                        playerAIsAdvantage = false; // Game back to deuce
                     }
                 } else {
                     if (playersWinOrder.charAt(i) == 'B') {
                         System.out.println("Player B wins the game\n");
                         return;
                     } else {
-                        playerBIsAdvantage = false;
+                        playerBIsAdvantage = false; // Game back to deuce
                     }
                 }
             } else {
@@ -69,28 +88,12 @@ public class TennisGame {
             System.out.println("Player A: " + playerAScore + " / Player B: " + playerBScore);
         }
     }
-    public static void main(String[] args) {
-        System.out.println("Game 1: ABABAA");
-        tennisScoreComputer("ABABAA");
 
-        System.out.println("Game 2: AAAA");
-        tennisScoreComputer("AAAA");
-
-        System.out.println("Game 3: AAABBBABAA");
-        tennisScoreComputer("AAABBBABAA");
-
-        System.out.println("Game 4: AAABBBABAA");
-        tennisScoreComputer("AAABBBABBB");
-
-        System.out.println("Game 5: ABABBABABB");
-        tennisScoreComputer("ABABBABABB");
-    }
-
-    private static boolean playersBothHave40(int scoreA, int scoreB) {
+    private boolean playersBothHave40(int scoreA, int scoreB) {
         return scoreA == 40 && scoreA == scoreB;
     }
 
-    private static void printWhoWins(char player) {
+    private void printWhoWins(char player) {
         if (player == 'A') {
             System.out.print("Player A wins, ");
         } else if (player == 'B') {
