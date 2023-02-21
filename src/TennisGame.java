@@ -29,9 +29,9 @@ public class TennisGame {
         for (int i = 0; i < playersWinOrder.length(); i++) {
             printWhoWins(playersWinOrder.charAt(i));
             // When the two players both have 40 points
-            if (playersBothHave40(playerAScore, playerBScore)) {
+            if (playerAScore == 40 && playerAScore == playerBScore) {
                 if (!playerAIsAdvantage && !playerBIsAdvantage) { // Game in deuce
-                    if (playersWinOrder.charAt(i) == 65) {
+                    if (playersWinOrder.charAt(i) == 'A') {
                         playerAIsAdvantage = true;
                     } else {
                         playerBIsAdvantage = true;
@@ -53,32 +53,24 @@ public class TennisGame {
                 }
             } else {
                 // For player A
-                if (playerAScore < 30) {
-                    if (playersWinOrder.charAt(i) == 'A') {
+                if (playersWinOrder.charAt(i) == 'A') {
+                    if (playerAScore < 30) {
                         playerAScore += 15;
-                    }
-                } else if (playerAScore == 30){
-                    if (playersWinOrder.charAt(i) == 'A') {
+                    } else if (playerAScore == 30) {
                         playerAScore += 10;
-                    }
-                } else if (playerAScore == 40) {
-                    if (playersWinOrder.charAt(i) == 'A') {
+                    } else {
                         System.out.println("Player A wins the game\n");
                         return;
                     }
                 }
 
-                // For player B
-                if (playerBScore < 30) {
-                    if (playersWinOrder.charAt(i) == 'B') {
+                // For player A
+                if (playersWinOrder.charAt(i) == 'B') {
+                    if (playerBScore < 30) {
                         playerBScore += 15;
-                    }
-                } else if (playerBScore == 30){
-                    if (playersWinOrder.charAt(i) == 'B') {
+                    } else if (playerBScore == 30) {
                         playerBScore += 10;
-                    }
-                } else if (playerBScore == 40) {
-                    if (playersWinOrder.charAt(i) == 'B') {
+                    } else {
                         System.out.println("Player B wins the game\n");
                         return;
                     }
@@ -87,10 +79,6 @@ public class TennisGame {
 
             System.out.println("Player A: " + playerAScore + " / Player B: " + playerBScore);
         }
-    }
-
-    private boolean playersBothHave40(int scoreA, int scoreB) {
-        return scoreA == 40 && scoreA == scoreB;
     }
 
     private void printWhoWins(char player) {
